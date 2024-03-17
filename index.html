@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- =================Script written by DProvat.===================== -->
+<!-- Please contact us if there are any errors or problems with usage. https://arprovat.com/  -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP function setup with ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    </head>
+    <body>
+    
+    <form id="emailForm">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <button type="button" id="submitBtn">Submit</button>
+    </form>  
+    
+    <script>
+        $(document).ready(function(){
+            $("#submitBtn").click(function(){
+                var email = $("#email").val();
+                $(this).prop('disabled', true).text('Sending...');
+                $.ajax({
+                    type: "POST",
+                    url: "server.php",
+                    data: { email: email },
+                    success: function(response){
+                        alert(response);
+                        $("#submitBtn").prop('disabled', false).text('Submit');
+                    }
+                });
+            });
+        });
+    </script>   
+</body>
+</html>
